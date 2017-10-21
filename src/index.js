@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import init from './init';
 import Game from './Game';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+const initialGameState = init();
+
+ReactDOM.render(<Game state={initialGameState}/>, document.getElementById('root'));
+
 registerServiceWorker();
