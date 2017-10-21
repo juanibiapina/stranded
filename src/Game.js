@@ -8,7 +8,7 @@ class Game extends Component {
   render() {
     return (
       <div className="Game">
-        <ActionList state={this.props.state} />
+        <ActionList store={this.props.store} />
       </div>
     );
   }

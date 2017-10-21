@@ -2,13 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import init from './init';
+import {actionFunc} from './actions';
 import Game from './Game';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
-const initialGameState = init();
+const initialModel = init();
 
-ReactDOM.render(<Game state={initialGameState}/>, document.getElementById('root'));
+const createStore = (initialModel) => {
+  let model = initialModel;
+
+  const getModel = () => model;
+
+  const runAction = (action) => {
+    model = actionFunc(action)(model)
+  };
+
+  return { getModel, runAction };
+};
+
+ReactDOM.render(
+  <Game store={createStore(initialModel)} />,
+  document.getElementById('root')
+);
 
 registerServiceWorker();

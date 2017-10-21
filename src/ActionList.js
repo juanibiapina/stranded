@@ -6,8 +6,8 @@ class ActionList extends Component {
   render() {
     return (
       <div className="ActionList">
-        {this.props.state.actions.map((action) => (
-          <Action action={action} key={action} />
+        {this.props.store.getModel().actions.map((action) => (
+          <Action store={this.props.store} action={action} key={action} />
         ))}
       </div>
     );
