@@ -1,7 +1,7 @@
 import {messages} from './messages';
 
 export const actions = {
-  OPEN_CAPSULE_DOOR: "OPEN_CAPSULE_DOOR",
+  OPEN_CAPSULE_HATCH: "OPEN_CAPSULE_HATCH",
 };
 
 
@@ -24,13 +24,13 @@ const addMessage = (model, message) => (
 const openCapsuleDoor = (model) => (
   {
     ...model,
-    actions: removeAction(model, actions.OPEN_CAPSULE_DOOR),
+    actions: removeAction(model, actions.OPEN_CAPSULE_HATCH),
     messages: addMessage(model, messages.CAPSULE_DOOR_OPENED),
   }
 );
 
 let actionData = {};
-actionData[actions.OPEN_CAPSULE_DOOR] = {
-  name: "Open capsule door",
+actionData[actions.OPEN_CAPSULE_HATCH] = {
+  name: "Open capsule hatch",
   func: openCapsuleDoor,
 };

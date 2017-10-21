@@ -8,7 +8,7 @@ import {runAction} from './actions';
 
 export const initialModel = {
   actions: [
-    actions.OPEN_CAPSULE_DOOR,
+    actions.OPEN_CAPSULE_HATCH,
   ],
   messages: [
     messages.STRANDED,
