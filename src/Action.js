@@ -7,7 +7,7 @@ class Action extends Component {
     return (
       <div className="Action">
         <button
-          onClick={this.props.store.runAction(this.props.action)}
+          onClick={() => this.props.dispatch(this.props.action)}
         >
           {actionName(this.props.action)}
         </button>

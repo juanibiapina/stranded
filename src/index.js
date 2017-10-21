@@ -1,30 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import App from 'palha';
+import { createReactRenderer } from './palhaReactRenderer';
 
-import init from './init';
-import {actionFunc} from './actions';
-import Game from './Game';
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
+import { initialModel, update, view } from './stranded';
 
-const initialModel = init();
+const stranded = new App({
+  initialModel: initialModel,
+  update: update,
+  view: view,
+  renderer: createReactRenderer(document.getElementById('root')),
+});
 
-const createStore = (initialModel) => {
-  let model = initialModel;
-
-  const getModel = () => model;
-
-  const runAction = (action) => {
-    model = actionFunc(action)(model)
-  };
-
-  return { getModel, runAction };
-};
-
-ReactDOM.render(
-  <Game store={createStore(initialModel)} />,
-  document.getElementById('root')
-);
+stranded.start();
 
 registerServiceWorker();

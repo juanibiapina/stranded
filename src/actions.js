@@ -1,16 +1,36 @@
-export const OPEN_CAPSULE_DOOR = "OPEN_CAPSULE_DOOR";
+import {messages} from './messages';
 
-const actions = {
-  OPEN_CAPSULE_DOOR: {
-    name: "Open capsule door",
-    func: (model) => model,
-  },
-}
+export const actions = {
+  OPEN_CAPSULE_DOOR: "OPEN_CAPSULE_DOOR",
+};
+
 
 export const actionName = (action) => (
-  actions[action]["name"] || "Unknown"
+  actionData[action]["name"] || "Unknown"
 )
 
-export const actionFunc = (action) => (
-  actions[action]["func"]
-)
+export const runAction = (model, action) => (
+  actionData[action].func(model)
+);
+
+const removeAction = (model, action) => (
+  model.actions.filter((ac) => ac !== action)
+);
+
+const addMessage = (model, message) => (
+  [ ...model.messages, message ]
+);
+
+const openCapsuleDoor = (model) => (
+  {
+    ...model,
+    actions: removeAction(model, actions.OPEN_CAPSULE_DOOR),
+    messages: addMessage(model, messages.CAPSULE_DOOR_OPENED),
+  }
+);
+
+let actionData = {};
+actionData[actions.OPEN_CAPSULE_DOOR] = {
+  name: "Open capsule door",
+  func: openCapsuleDoor,
+};
