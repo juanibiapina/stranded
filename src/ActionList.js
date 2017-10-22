@@ -6,8 +6,8 @@ class ActionList extends Component {
   render() {
     return (
       <div className="ActionList">
-        {this.props.model.actions.filter((action) => !action.hidden).map((action) => (
-          <Action model={this.props.model} dispatch={this.props.dispatch} action={action} key={action.id} />
+        {this.props.actions.map((action) => (
+          <Action dispatch={this.props.dispatch} action={action} key={action} />
         ))}
       </div>
     );

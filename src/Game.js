@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 
-import MessageList from './MessageList';
-import ActionList from './ActionList';
-
-import {actionIds} from './actions';
+import Splash from './Splash';
+import Capsule from './Capsule';
+import GameOver from './GameOver';
 
 import './Game.css';
 
 class Game extends Component {
-  tick() {
-    this.props.dispatch(actionIds.TICK);
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
+  getComponentForStage(stage) {
+    switch (stage) {
+      case "SPLASH":
+        return Splash;
+      case "CAPSULE":
+        return Capsule;
+      default:
+        return GameOver;
+    }
   }
 
   render() {
+    let Component = this.getComponentForStage(this.props.model.stage);
+
     return (
       <div className="Game">
-        <MessageList model={this.props.model} dispatch={this.props.dispatch} />
-        <ActionList model={this.props.model} dispatch={this.props.dispatch} />
+        <Component model={this.props.model} dispatch={this.props.dispatch} />
       </div>
     );
   }

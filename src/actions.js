@@ -1,15 +1,11 @@
 import {messages, createMessage} from './messages';
 
 export const actionIds = {
+  START: "START",
   OPEN_CAPSULE_HATCH: "OPEN_CAPSULE_HATCH",
   KICK_CAPSULE_HATCH: "KICK_CAPSULE_HATCH",
-  TICK: "TICK",
+  TOGGLE_OPEN_HATCH_ACTION: "TOGGLE_OPEN_HATCH_ACTION",
 };
-
-export const createAction = (actionId, hidden = false) => ({
-  id: actionId,
-  hidden: hidden,
-});
 
 export const actionName = (actionId) => (
   actionData[actionId].name
@@ -19,27 +15,34 @@ export const runAction = (model, actionId) => (
   actionData[actionId].func(model)
 );
 
-const removeAction = (actions, actionId) => (
-  actions.filter((ac) => ac.id !== actionId)
-);
-
-const removeTicker = (tickers, tickerId) => (
-  tickers.filter((t) => t.id !== tickerId)
-);
-
 const addMessage = (model, message) => (
   [ ...model.messages, createMessage(message) ]
 );
 
+const startGame = (model) => {
+  return {
+    ...model,
+    stage: "CAPSULE",
+    hatch: {
+      lightVisible: false,
+      triedButton: false,
+      stuck: true,
+      requiredKicks: 3,
+    },
+    messages: [
+      createMessage(messages.STRANDED),
+    ],
+  };
+};
+
 const openCapsuleHatch = (model) => {
-  if (model.hatch.openButtonNeverPressed) {
+  if (!model.hatch.triedButton) {
     return {
       ...model,
       hatch: {
         ...model.hatch,
-        openButtonNeverPressed: false,
+        triedButton: true,
       },
-      actions: [ createAction(actionIds.KICK_CAPSULE_HATCH), ...model.actions ],
       messages: addMessage(model, messages.NOTHING_HAPPENED),
     };
   }
@@ -53,8 +56,7 @@ const openCapsuleHatch = (model) => {
 
   return {
     ...model,
-    tickers: removeTicker(model.tickers, "BLINK_OPEN_HATCH_ACTION_TICKER"),
-    actions: removeAction(removeAction(model.actions, actionIds.KICK_CAPSULE_HATCH), actionIds.OPEN_CAPSULE_HATCH),
+    stage: "END",
     messages: addMessage(model, messages.CAPSULE_HATCH_OPEN),
   };
 };
@@ -86,17 +88,19 @@ const kickCapsuleHatch = (model) => {
   };
 };
 
-const tick = (m) => {
-  let model = m;
-
-  model.tickers.forEach((ticker) => {
-    model = ticker.func(model);
-  });
-
-  return model;
-};
+const toggleOpenHatchAction = (model) => ({
+  ...model,
+  hatch: {
+    ...model.hatch,
+    lightVisible: !model.hatch.lightVisible,
+  },
+});
 
 let actionData = {};
+actionData[actionIds.START] = {
+  name: "Start",
+  func: startGame,
+};
 actionData[actionIds.OPEN_CAPSULE_HATCH] = {
   name: "OPEN",
   func: openCapsuleHatch,
@@ -105,7 +109,7 @@ actionData[actionIds.KICK_CAPSULE_HATCH] = {
   name: "Kick hatch",
   func: kickCapsuleHatch,
 };
-actionData[actionIds.TICK] = {
-  name: "Tick",
-  func: tick,
+actionData[actionIds.TOGGLE_OPEN_HATCH_ACTION] = {
+  name: "TOGGLE_OPEN_HATCH_ACTION",
+  func: toggleOpenHatchAction,
 };
