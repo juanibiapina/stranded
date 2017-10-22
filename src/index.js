@@ -1,7 +1,7 @@
 import App from 'palha';
-import { createReactRenderer } from './palhaReactRenderer';
+import { createReactRenderer } from './utils/palhaReactRenderer';
 
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './utils/registerServiceWorker';
 
 import { initialModel, update, view } from './stranded';
 
