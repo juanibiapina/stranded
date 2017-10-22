@@ -7,6 +7,11 @@ import Game from './Game';
 import {runAction} from './actions';
 
 export const initialModel = {
+  hatch: {
+    openButtonNeverPressed: true,
+    stuck: true,
+    requiredKicks: 3,
+  },
   actions: [
     actions.OPEN_CAPSULE_HATCH,
   ],
