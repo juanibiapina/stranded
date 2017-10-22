@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Splash from './Splash';
-import Capsule from './Capsule';
-import GameOver from './GameOver';
+import Splash from 'stages/Splash';
+import Capsule from 'stages/Capsule';
+import GameOver from 'stages/GameOver';
 
-import './Game.css';
+import 'Game.css';
 
 class Game extends Component {
   getComponentForStage(stage) {

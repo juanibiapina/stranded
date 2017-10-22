@@ -1,4 +1,4 @@
-import {messages, createMessage} from './messages';
+import {messages, createMessage} from 'messages';
 
 export const actionIds = {
   START: "START",

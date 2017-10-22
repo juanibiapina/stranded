@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {actionIds} from './actions';
+import {actionIds} from 'actions';
 
 class Splash extends Component {
   render() {

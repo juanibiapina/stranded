@@ -1,9 +1,22 @@
+import React from 'react'
 import App from 'palha';
-import { createReactRenderer } from './utils/palhaReactRenderer';
+import { createReactRenderer } from 'utils/palhaReactRenderer';
+import registerServiceWorker from 'utils/registerServiceWorker';
 
-import registerServiceWorker from './utils/registerServiceWorker';
+import Game from 'Game';
+import {runAction} from 'actions';
 
-import { initialModel, update, view } from './stranded';
+export const initialModel = {
+  stage: "SPLASH",
+};
+
+export const view = (model, dispatch) => (
+  <Game model={model} dispatch={dispatch} />
+);
+
+export const update = (model, actionId) => (
+  runAction(model, actionId)
+);
 
 const stranded = new App({
   initialModel: initialModel,

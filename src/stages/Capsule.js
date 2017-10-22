@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import MessageList from './MessageList';
-import ActionList from './ActionList';
+import MessageList from 'MessageList';
+import ActionList from 'ActionList';
 
-import {actionIds} from './actions';
+import {actionIds} from 'actions';
 
 class Capsule extends Component {
   tick() {
