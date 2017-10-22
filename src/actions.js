@@ -25,18 +25,29 @@ const addMessage = (model, message) => (
 const openCapsuleHatch = (model) => (
   {
     ...model,
+    hatchHP: 3,
     actions: [ ...removeAction(model, actions.OPEN_CAPSULE_HATCH), actions.KICK_CAPSULE_HATCH ],
-    messages: addMessage(model, messages.CAPSULE_HATCH_STUCK),
+    messages: addMessage(model, messages.CAPSULE_HATCH_STUCK_3),
   }
 );
 
-const kickCapsuleHatch = (model) => (
-  {
-    ...model,
-    actions: removeAction(model, actions.KICK_CAPSULE_HATCH),
-    messages: addMessage(model, messages.CAPSULE_HATCH_OPEN),
+const kickCapsuleHatch = (model) => {
+  let newHatchHP = model.hatchHP - 1;
+
+  if (newHatchHP === 0) {
+    return {
+      ...model,
+      actions: removeAction(model, actions.KICK_CAPSULE_HATCH),
+      messages: addMessage(model, messages.CAPSULE_HATCH_OPEN),
+    };
   }
-);
+
+  return {
+    ...model,
+    hatchHP: newHatchHP,
+    messages: addMessage(model, messages[`CAPSULE_HATCH_STUCK_${newHatchHP}`]),
+  };
+};
 
 let actionData = {};
 actionData[actions.OPEN_CAPSULE_HATCH] = {
