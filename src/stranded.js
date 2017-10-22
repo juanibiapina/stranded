@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {messages} from './messages';
+import {messages, createMessage} from './messages';
 import {actions} from './actions';
 
 import Game from './Game';
@@ -16,7 +16,7 @@ export const initialModel = {
     actions.OPEN_CAPSULE_HATCH,
   ],
   messages: [
-    messages.STRANDED,
+    createMessage(messages.STRANDED),
   ],
 };
 

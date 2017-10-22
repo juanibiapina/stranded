@@ -1,10 +1,12 @@
 export const messages = {
   STRANDED: "STRANDED",
+
   CAPSULE_HATCH_STUCK_2: "CAPSULE_HATCH_STUCK_2",
   CAPSULE_HATCH_STUCK_1: "CAPSULE_HATCH_STUCK_1",
   CAPSULE_MECHANISM_STUCK: "CAPSULE_MECHANISM_STUCK",
   CAPSULE_MECHANISM_UNSTUCK: "CAPSULE_MECHANISM_UNSTUCK",
   CAPSULE_HATCH_OPEN: "CAPSULE_HATCH_OPEN",
+
   NOTHING_HAPPENED: "NOTHING_HAPPENED",
 };
 
@@ -17,6 +19,11 @@ messageData[messages.CAPSULE_MECHANISM_UNSTUCK] = "You hear a constant, turning 
 messageData[messages.CAPSULE_HATCH_OPEN] = "The hatch slides open. The sunlight is blinding.";
 messageData[messages.NOTHING_HAPPENED] = "Nothing happened.";
 
-export const messageText = (message) => (
-  messageData[message]
+let messageId = 0;
+
+export const createMessage = (message) => (
+  {
+    id: messageId++,
+    text: messageData[message],
+  }
 );

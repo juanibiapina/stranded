@@ -1,4 +1,4 @@
-import {messages} from './messages';
+import {messages, createMessage} from './messages';
 
 export const actions = {
   OPEN_CAPSULE_HATCH: "OPEN_CAPSULE_HATCH",
@@ -19,7 +19,7 @@ const removeItem = (actions, action) => (
 );
 
 const addMessage = (model, message) => (
-  [ ...model.messages, message ]
+  [ ...model.messages, createMessage(message) ]
 );
 
 const openCapsuleHatch = (model) => {
