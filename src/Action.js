@@ -7,9 +7,9 @@ class Action extends Component {
     return (
       <div className="Action">
         <button
-          onClick={() => this.props.dispatch(this.props.action)}
+          onClick={() => this.props.dispatch(this.props.action.id)}
         >
-          {actionName(this.props.action)}
+          {actionName(this.props.action.id)}
         </button>
       </div>
     );

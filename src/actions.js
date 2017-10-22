@@ -1,21 +1,30 @@
 import {messages, createMessage} from './messages';
 
-export const actions = {
+export const actionIds = {
   OPEN_CAPSULE_HATCH: "OPEN_CAPSULE_HATCH",
   KICK_CAPSULE_HATCH: "KICK_CAPSULE_HATCH",
+  TICK: "TICK",
 };
 
+export const createAction = (actionId, hidden = false) => ({
+  id: actionId,
+  hidden: hidden,
+});
 
-export const actionName = (action) => (
-  actionData[action]["name"] || "Unknown"
+export const actionName = (actionId) => (
+  actionData[actionId].name
 )
 
-export const runAction = (model, action) => (
-  actionData[action].func(model)
+export const runAction = (model, actionId) => (
+  actionData[actionId].func(model)
 );
 
-const removeItem = (actions, action) => (
-  actions.filter((ac) => ac !== action)
+const removeAction = (actions, actionId) => (
+  actions.filter((ac) => ac.id !== actionId)
+);
+
+const removeTicker = (tickers, tickerId) => (
+  tickers.filter((t) => t.id !== tickerId)
 );
 
 const addMessage = (model, message) => (
@@ -30,7 +39,7 @@ const openCapsuleHatch = (model) => {
         ...model.hatch,
         openButtonNeverPressed: false,
       },
-      actions: [ ...model.actions, actions.KICK_CAPSULE_HATCH ],
+      actions: [ createAction(actionIds.KICK_CAPSULE_HATCH), ...model.actions ],
       messages: addMessage(model, messages.NOTHING_HAPPENED),
     };
   }
@@ -44,7 +53,8 @@ const openCapsuleHatch = (model) => {
 
   return {
     ...model,
-    actions: removeItem(removeItem(model.actions, actions.KICK_CAPSULE_HATCH), actions.OPEN_CAPSULE_HATCH),
+    tickers: removeTicker(model.tickers, "BLINK_OPEN_HATCH_ACTION_TICKER"),
+    actions: removeAction(removeAction(model.actions, actionIds.KICK_CAPSULE_HATCH), actionIds.OPEN_CAPSULE_HATCH),
     messages: addMessage(model, messages.CAPSULE_HATCH_OPEN),
   };
 };
@@ -76,12 +86,26 @@ const kickCapsuleHatch = (model) => {
   };
 };
 
+const tick = (m) => {
+  let model = m;
+
+  model.tickers.forEach((ticker) => {
+    model = ticker.func(model);
+  });
+
+  return model;
+};
+
 let actionData = {};
-actionData[actions.OPEN_CAPSULE_HATCH] = {
+actionData[actionIds.OPEN_CAPSULE_HATCH] = {
   name: "OPEN",
   func: openCapsuleHatch,
 };
-actionData[actions.KICK_CAPSULE_HATCH] = {
+actionData[actionIds.KICK_CAPSULE_HATCH] = {
   name: "Kick hatch",
   func: kickCapsuleHatch,
+};
+actionData[actionIds.TICK] = {
+  name: "Tick",
+  func: tick,
 };
