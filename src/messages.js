@@ -1,3 +1,5 @@
+import {generate} from 'shortid';
+
 export const messages = {
   STRANDED: "STRANDED",
 
@@ -19,11 +21,9 @@ messageData[messages.CAPSULE_MECHANISM_UNSTUCK] = "You hear a constant, turning 
 messageData[messages.CAPSULE_HATCH_OPEN] = "The hatch slides open. The sunlight is blinding.";
 messageData[messages.NOTHING_HAPPENED] = "Nothing happened.";
 
-let messageId = 0;
-
 export const createMessage = (message) => (
   {
-    id: messageId++,
+    id: generate(),
     text: messageData[message],
   }
 );
