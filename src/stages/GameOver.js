@@ -4,7 +4,7 @@ class GameOver extends Component {
   render() {
     return (
       <div className="GameOver">
-        Game Over
+        The End
       </div>
     );
   }
