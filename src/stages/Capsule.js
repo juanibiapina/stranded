@@ -7,7 +7,7 @@ import {actionIds} from 'actions';
 
 class Capsule extends Component {
   tick() {
-    this.props.dispatch(actionIds.TOGGLE_OPEN_HATCH_ACTION);
+    this.props.dispatch(actionIds.TOGGLE_HATCH_LIGHT);
   }
 
   componentDidMount() {

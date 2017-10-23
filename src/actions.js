@@ -4,7 +4,7 @@ export const actionIds = {
   START: "START",
   OPEN_CAPSULE_HATCH: "OPEN_CAPSULE_HATCH",
   KICK_CAPSULE_HATCH: "KICK_CAPSULE_HATCH",
-  TOGGLE_OPEN_HATCH_ACTION: "TOGGLE_OPEN_HATCH_ACTION",
+  TOGGLE_HATCH_LIGHT: "TOGGLE_HATCH_LIGHT",
 };
 
 export const actionName = (actionId) => (
@@ -109,7 +109,7 @@ actionData[actionIds.KICK_CAPSULE_HATCH] = {
   name: "Kick hatch",
   func: kickCapsuleHatch,
 };
-actionData[actionIds.TOGGLE_OPEN_HATCH_ACTION] = {
-  name: "TOGGLE_OPEN_HATCH_ACTION",
+actionData[actionIds.TOGGLE_HATCH_LIGHT] = {
+  name: "TOGGLE_HATCH_LIGHT",
   func: toggleOpenHatchAction,
 };
