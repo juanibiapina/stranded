@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import MessageList from 'components/MessageList';
+import Action from 'components/Action';
 import ActionList from 'components/ActionList';
 
 import {actionIds} from 'actions';
@@ -37,6 +38,7 @@ class Capsule extends Component {
       <div className="Capsule">
         <MessageList model={this.props.model} dispatch={this.props.dispatch} />
         <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />
+        <Action dispatch={this.props.dispatch} action={actionIds.RESTART} />
       </div>
     );
   }

@@ -3,6 +3,7 @@ import {saveModel} from 'storage';
 
 export const actionIds = {
   START: "START",
+  RESTART: "RESTART",
   OPEN_CAPSULE_HATCH: "OPEN_CAPSULE_HATCH",
   KICK_CAPSULE_HATCH: "KICK_CAPSULE_HATCH",
   TOGGLE_HATCH_LIGHT: "TOGGLE_HATCH_LIGHT",
@@ -37,6 +38,12 @@ const startGame = (model) => {
     messages: [
       createMessage(messages.STRANDED),
     ],
+  };
+};
+
+const reStartGame = (model) => {
+  return {
+    stage: "SPLASH",
   };
 };
 
@@ -105,6 +112,10 @@ let actionData = {};
 actionData[actionIds.START] = {
   name: "Start",
   func: startGame,
+};
+actionData[actionIds.RESTART] = {
+  name: "Restart",
+  func: reStartGame,
 };
 actionData[actionIds.OPEN_CAPSULE_HATCH] = {
   name: "OPEN",
