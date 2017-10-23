@@ -1,4 +1,5 @@
 import {messages, createMessage} from 'messages';
+import {saveModel} from 'storage';
 
 export const actionIds = {
   START: "START",
@@ -11,9 +12,13 @@ export const actionName = (actionId) => (
   actionData[actionId].name
 )
 
-export const runAction = (model, actionId) => (
-  actionData[actionId].func(model)
-);
+export const runAction = (model, actionId) => {
+  let newModel = actionData[actionId].func(model);
+
+  saveModel(newModel);
+
+  return newModel;
+};
 
 const addMessage = (model, message) => (
   [ ...model.messages, createMessage(message) ]

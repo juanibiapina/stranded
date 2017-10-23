@@ -5,6 +5,7 @@ import registerServiceWorker from 'utils/registerServiceWorker';
 
 import Game from 'components/Game';
 import {runAction} from 'actions';
+import {loadModel} from 'storage';
 
 export const initialModel = {
   stage: "SPLASH",
@@ -19,7 +20,7 @@ export const update = (model, actionId) => (
 );
 
 const stranded = new App({
-  initialModel: initialModel,
+  initialModel: loadModel() || initialModel,
   update: update,
   view: view,
   renderer: createReactRenderer(document.getElementById('root')),
