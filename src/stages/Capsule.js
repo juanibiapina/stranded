@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import MessageList from 'MessageList';
-import ActionList from 'ActionList';
+import MessageList from 'components/MessageList';
+import ActionList from 'components/ActionList';
 
 import {actionIds} from 'actions';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Action from 'Action';
+import Action from 'components/Action';
 
 class ActionList extends Component {
   render() {

@@ -4,7 +4,7 @@ import Splash from 'stages/Splash';
 import Capsule from 'stages/Capsule';
 import GameOver from 'stages/GameOver';
 
-import 'Game.css';
+import './styles.css';
 
 class Game extends Component {
   getComponentForStage(stage) {

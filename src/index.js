@@ -3,7 +3,7 @@ import App from 'palha';
 import { createReactRenderer } from 'utils/palhaReactRenderer';
 import registerServiceWorker from 'utils/registerServiceWorker';
 
-import Game from 'Game';
+import Game from 'components/Game';
 import {runAction} from 'actions';
 
 export const initialModel = {
