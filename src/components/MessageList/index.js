@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import './styles.css';
+
+const Fade = ({ children, ...props }) => (
+  <CSSTransition
+    {...props}
+    timeout={1000}
+    classNames="fade"
+  >
+    {children}
+  </CSSTransition>
+);
 
 class MessageList extends Component {
   render() {
     return (
       <div className="MessageList">
         <div className="MessageList-container container">
-          <div className="MessageList-bottom">
+          <TransitionGroup className="MessageList-bottom">
             {this.props.model.messages.map((message) => (
-              <div key={message.id}>
-                {message.text}
-              </div>
+              <Fade key={message.id}>
+                <div className="Message">
+                  {message.text}
+                </div>
+              </Fade>
             ))}
-          </div>
+          </TransitionGroup>
         </div>
       </div>
     );
