@@ -17,8 +17,3 @@
   opacity: 1;
   transition: opacity 1000ms ease-in;
 }
-
-.Message {
-  padding-left: 10px;
-  padding-bottom: 10px;
-}

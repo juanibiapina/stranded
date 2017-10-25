@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
+import Message from 'components/Message';
+
 import './styles.css';
 
 const Fade = ({ children, ...props }) => (
@@ -20,9 +22,7 @@ class MessageList extends Component {
         <TransitionGroup className="MessageList-bottom">
           {this.props.model.messages.map((message) => (
             <Fade key={message.id}>
-              <div className="Message">
-                > {message.text}
-              </div>
+              <Message message={message} />
             </Fade>
           ))}
         </TransitionGroup>
