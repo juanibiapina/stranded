@@ -4,8 +4,6 @@ import Splash from 'stages/Splash';
 import Capsule from 'stages/Capsule';
 import GameOver from 'stages/GameOver';
 
-import './styles.css';
-
 class Game extends Component {
   getComponentForStage(stage) {
     switch (stage) {
@@ -22,9 +20,7 @@ class Game extends Component {
     let Component = this.getComponentForStage(this.props.model.stage);
 
     return (
-      <div className="Game">
-        <Component model={this.props.model} dispatch={this.props.dispatch} />
-      </div>
+      <Component model={this.props.model} dispatch={this.props.dispatch} />
     );
   }
 }

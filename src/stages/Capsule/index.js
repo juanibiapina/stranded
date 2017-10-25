@@ -6,6 +6,8 @@ import ActionList from 'components/ActionList';
 
 import {actionIds} from 'actions';
 
+import './styles.css';
+
 class Capsule extends Component {
   tick() {
     this.props.dispatch(actionIds.TOGGLE_HATCH_LIGHT);
@@ -37,8 +39,11 @@ class Capsule extends Component {
     return (
       <div className="Capsule">
         <MessageList model={this.props.model} dispatch={this.props.dispatch} />
-        <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />
-        <Action dispatch={this.props.dispatch} action={actionIds.RESTART} />
+
+        <div className="container">
+          <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />
+          <Action dispatch={this.props.dispatch} action={actionIds.RESTART} />
+        </div>
       </div>
     );
   }

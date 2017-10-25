@@ -7,6 +7,8 @@ import Game from 'components/Game';
 import {runAction} from 'actions';
 import {loadModel} from 'storage';
 
+import 'index.css';
+
 export const initialModel = {
   stage: "SPLASH",
 };
