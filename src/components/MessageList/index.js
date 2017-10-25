@@ -16,18 +16,16 @@ const Fade = ({ children, ...props }) => (
 class MessageList extends Component {
   render() {
     return (
-      <div className="MessageList">
-        <div className="MessageList-container container">
-          <TransitionGroup className="MessageList-bottom">
-            {this.props.model.messages.map((message) => (
-              <Fade key={message.id}>
-                <div className="Message">
-                  {message.text}
-                </div>
-              </Fade>
-            ))}
-          </TransitionGroup>
-        </div>
+      <div className="MessageList container">
+        <TransitionGroup className="MessageList-bottom">
+          {this.props.model.messages.map((message) => (
+            <Fade key={message.id}>
+              <div className="Message">
+                {message.text}
+              </div>
+            </Fade>
+          ))}
+        </TransitionGroup>
       </div>
     );
   }

@@ -38,7 +38,9 @@ class Capsule extends Component {
   render() {
     return (
       <div className="Capsule">
-        <MessageList model={this.props.model} dispatch={this.props.dispatch} />
+        <div className="header">
+          <MessageList model={this.props.model} dispatch={this.props.dispatch} />
+        </div>
 
         <div className="container">
           <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />

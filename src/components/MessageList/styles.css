@@ -1,10 +1,4 @@
 .MessageList {
-  background-color: #212930;
-  color: #D2D6D9;
-  height: 20%;
-}
-
-.MessageList-container {
   height: 100%;
   position: relative;
   overflow: hidden;
