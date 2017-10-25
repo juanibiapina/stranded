@@ -1,14 +1,8 @@
 .MessageList {
   height: 100%;
-  width: 60%;
-  position: relative;
-  overflow: hidden;
-  margin: auto;
-}
-
-.MessageList-bottom {
-  position: absolute;
-  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .fade-enter {
