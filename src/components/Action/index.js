@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import {actionName} from 'actions';
 
+import './styles.css';
+
 class Action extends Component {
   render() {
     return (
