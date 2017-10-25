@@ -42,8 +42,10 @@ class Capsule extends Component {
           <MessageList model={this.props.model} dispatch={this.props.dispatch} />
         </div>
 
-        <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />
-        <Action dispatch={this.props.dispatch} action={actionIds.RESTART} />
+        <div className="content">
+          <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />
+          <Action dispatch={this.props.dispatch} action={actionIds.RESTART} />
+        </div>
       </div>
     );
   }
