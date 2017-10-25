@@ -9,6 +9,7 @@
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
     "react-transition-group": "^2.2.1",
+    "sanitize.css": "^5.0.0",
     "shortid": "^2.2.8"
   },
   "scripts": {
