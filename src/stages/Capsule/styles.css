@@ -2,6 +2,14 @@
   height: 100%;
 }
 
+.Capsule .open-container {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .header {
   background-color: #212930;
   color: #D2D6D9;

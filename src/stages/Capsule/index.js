@@ -28,10 +28,6 @@ class Capsule extends Component {
       actions = [...actions, actionIds.KICK_CAPSULE_HATCH];
     }
 
-    if (this.props.model.hatch.lightVisible) {
-      actions = [...actions, actionIds.OPEN_CAPSULE_HATCH];
-    }
-
     return actions;
   }
 
@@ -43,8 +39,13 @@ class Capsule extends Component {
         </div>
 
         <div className="content">
+          <div className="open-container">
+            {this.props.model.hatch.lightVisible ? (
+              <Action dispatch={this.props.dispatch} action={actionIds.OPEN_CAPSULE_HATCH} />
+            ) : null}
+          </div>
+
           <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />
-          <Action dispatch={this.props.dispatch} action={actionIds.RESTART} />
         </div>
       </div>
     );
