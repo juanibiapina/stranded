@@ -21,7 +21,7 @@ class MessageList extends Component {
           {this.props.model.messages.map((message) => (
             <Fade key={message.id}>
               <div className="Message">
-                {message.text}
+                > {message.text}
               </div>
             </Fade>
           ))}
