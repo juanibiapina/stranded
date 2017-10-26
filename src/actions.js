@@ -1,5 +1,6 @@
 import {messages, createMessage} from 'messages';
 import {saveModel} from 'storage';
+import {addMessage} from 'model';
 
 export const actionIds = {
   START: "START",
@@ -20,10 +21,6 @@ export const runAction = (model, actionId) => {
 
   return newModel;
 };
-
-const addMessage = (model, message) => (
-  [ ...model.messages, createMessage(message) ]
-);
 
 const startGame = (model) => {
   return {
