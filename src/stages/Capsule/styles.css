@@ -1,7 +1,3 @@
-.Capsule {
-  height: 100%;
-}
-
 .Capsule .open-container {
   height: 100px;
   display: flex;
