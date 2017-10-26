@@ -5,7 +5,7 @@ import './styles.css';
 class Message extends Component {
   render() {
     return (
-      <div className="Message">
+      <div className="Message" style={{opacity: this.props.opacity}}>
         > {this.props.message.text}
       </div>
     );

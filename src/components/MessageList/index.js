@@ -16,12 +16,16 @@ const Fade = ({ children, ...props }) => (
 );
 
 class MessageList extends Component {
+  calculateOpacity(index) {
+    return (index + 1) / this.props.model.messages.length;
+  }
+
   render() {
     return (
       <TransitionGroup className="MessageList">
-        {this.props.model.messages.map((message) => (
+        {this.props.model.messages.map((message, index) => (
           <Fade key={message.id}>
-            <Message message={message} />
+            <Message message={message} opacity={this.calculateOpacity(index)} />
           </Fade>
         ))}
       </TransitionGroup>
