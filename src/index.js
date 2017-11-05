@@ -6,6 +6,7 @@ import registerServiceWorker from 'utils/registerServiceWorker';
 import Game from 'components/Game';
 import {loadModel} from 'storage';
 import {update} from 'update';
+import {animationFrameMessage} from 'messages';
 
 import 'sanitize.css';
 import 'index.css';
@@ -24,6 +25,25 @@ const stranded = new App({
   view: view,
   renderer: createReactRenderer(document.getElementById('root')),
 });
+
+let previousTime = -1;
+
+const callback = (currentTime) => {
+  if (previousTime === -1) {
+    previousTime = currentTime;
+    requestAnimationFrame(callback);
+    return
+  }
+
+  let delta = currentTime - previousTime;
+
+  stranded.dispatch(animationFrameMessage(delta));
+  previousTime = currentTime;
+
+  requestAnimationFrame(callback);
+};
+
+requestAnimationFrame(callback);
 
 stranded.start();
 

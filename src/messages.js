@@ -17,3 +17,8 @@ export const openCapsuleHatchMessage = () => ({
 export const kickCapsuleHatchMessage = () => ({
   type: "KICK_CAPSULE_HATCH_MESSAGE",
 });
+
+export const animationFrameMessage = (delta) => ({
+  type: "ANIMATION_FRAME_MESSAGE",
+  delta: delta,
+});

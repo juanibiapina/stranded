@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import MessageList from 'components/MessageList';
 import Action from 'components/Action';
+import Status from 'components/Status';
 
 import {kickCapsuleHatchMessage, openCapsuleHatchMessage, toggleHatchLightMessage} from 'messages';
 
@@ -36,6 +37,10 @@ class Capsule extends Component {
 
           <div className="actions-container">
             {this.props.model.hatch.triedButton && <Action dispatch={this.props.dispatch} text="Kick hatch" message={kickCapsuleHatchMessage()} />}
+          </div>
+
+          <div className="status-container">
+            {this.props.model.suffocationActive && <Status text="Air" max={30000} current={this.props.model.suffocatesIn} />}
           </div>
         </div>
       </div>

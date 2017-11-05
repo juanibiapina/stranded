@@ -1,0 +1,8 @@
+.Status {
+  width: 100%;
+  background: white;
+}
+
+.Status .progress {
+  background: grey;
+}

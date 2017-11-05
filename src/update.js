@@ -20,6 +20,8 @@ const startGame = (model) => {
       stuck: true,
       requiredKicks: 3,
     },
+    suffocationActive: false,
+    suffocatesIn: 30000,
     userMessages: [
       createUserMessage(userMessages.STRANDED),
     ],
@@ -89,7 +91,32 @@ const kickCapsuleHatch = (model) => {
       ...model.hatch,
       requiredKicks: requiredKicks,
     },
+    suffocationActive: requiredKicks <= 2,
     userMessages: addMessage(model, userMessages[`CAPSULE_HATCH_STUCK_${requiredKicks}`]),
+  };
+};
+
+const updateSuffocation = (model, message) => {
+  if (model.stage !== "CAPSULE") {
+    return model;
+  }
+
+  if (!model.suffocationActive) {
+    return model;
+  }
+
+  let newSuffocatesIn = model.suffocatesIn - message.delta;
+
+  if (newSuffocatesIn <= 0) {
+    return {
+      ...model,
+      stage: "END",
+    };
+  }
+
+  return {
+    ...model,
+    suffocatesIn: newSuffocatesIn,
   };
 };
 
@@ -99,3 +126,4 @@ messageMap["TOGGLE_HATCH_LIGHT_MESSAGE"] = toggleOpenHatch;
 messageMap["RESTART_MESSAGE"] = reStartGame;
 messageMap["OPEN_CAPSULE_HATCH_MESSAGE"] = openCapsuleHatch;
 messageMap["KICK_CAPSULE_HATCH_MESSAGE"] = kickCapsuleHatch;
+messageMap["ANIMATION_FRAME_MESSAGE"] = updateSuffocation;
