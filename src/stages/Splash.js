@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 
-import {actionIds} from 'actions';
+import Action from 'components/Action';
+import {startMessage} from 'messages';
 
 class Splash extends Component {
   render() {
     return (
       <div className="Splash">
-        <button
-          onClick={() => this.props.dispatch(actionIds.START)}
-        >
-          Start
-        </button>
+        <Action dispatch={this.props.dispatch} text="Start" message={startMessage()} />
       </div>
     );
   }

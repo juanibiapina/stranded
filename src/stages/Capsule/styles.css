@@ -6,6 +6,12 @@
   align-items: center;
 }
 
+.Capsule .actions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .header {
   background-color: #212930;
   color: #D2D6D9;

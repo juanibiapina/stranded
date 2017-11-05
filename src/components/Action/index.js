@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import {actionName} from 'actions';
-
 import './styles.css';
 
 class Action extends Component {
@@ -9,9 +7,9 @@ class Action extends Component {
     return (
       <div className="Action">
         <button
-          onClick={() => this.props.dispatch(this.props.action)}
+          onClick={() => this.props.dispatch(this.props.message)}
         >
-          {actionName(this.props.action)}
+          {this.props.text}
         </button>
       </div>
     );

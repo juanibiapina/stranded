@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import Game from 'components/Game';
 
 const model = {
-  actions: [],
   userMessages: [],
 };
 

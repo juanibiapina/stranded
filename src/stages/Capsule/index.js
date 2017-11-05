@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 
 import MessageList from 'components/MessageList';
 import Action from 'components/Action';
-import ActionList from 'components/ActionList';
 
-import {actionIds} from 'actions';
+import {kickCapsuleHatchMessage, openCapsuleHatchMessage, toggleHatchLightMessage} from 'messages';
 
 import './styles.css';
 
 class Capsule extends Component {
   tick() {
-    this.props.dispatch(actionIds.TOGGLE_HATCH_LIGHT);
+    this.props.dispatch(toggleHatchLightMessage());
   }
 
   componentDidMount() {
@@ -19,16 +18,6 @@ class Capsule extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  }
-
-  getActions() {
-    let actions = [];
-
-    if (this.props.model.hatch.triedButton) {
-      actions = [...actions, actionIds.KICK_CAPSULE_HATCH];
-    }
-
-    return actions;
   }
 
   render() {
@@ -41,11 +30,13 @@ class Capsule extends Component {
         <div className="content">
           <div className="open-container">
             {this.props.model.hatch.lightVisible ? (
-              <Action dispatch={this.props.dispatch} action={actionIds.OPEN_CAPSULE_HATCH} />
+              <Action dispatch={this.props.dispatch} text="OPEN" message={openCapsuleHatchMessage()} />
             ) : null}
           </div>
 
-          <ActionList actions={this.getActions()} dispatch={this.props.dispatch} />
+          <div className="actions-container">
+            {this.props.model.hatch.triedButton && <Action dispatch={this.props.dispatch} text="Kick hatch" message={kickCapsuleHatchMessage()} />}
+          </div>
         </div>
       </div>
     );

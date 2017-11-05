@@ -1,21 +1,9 @@
-import {userMessages, createUserMessage} from 'userMessages';
 import {saveModel} from 'storage';
 import {addMessage} from 'model';
+import {userMessages, createUserMessage} from 'userMessages';
 
-export const actionIds = {
-  START: "START",
-  RESTART: "RESTART",
-  OPEN_CAPSULE_HATCH: "OPEN_CAPSULE_HATCH",
-  KICK_CAPSULE_HATCH: "KICK_CAPSULE_HATCH",
-  TOGGLE_HATCH_LIGHT: "TOGGLE_HATCH_LIGHT",
-};
-
-export const actionName = (actionId) => (
-  actionData[actionId].name
-)
-
-export const runAction = (model, actionId) => {
-  let newModel = actionData[actionId].func(model);
+export const update = (model, message) => {
+  let newModel = messageMap[message.type](model, message)
 
   saveModel(newModel);
 
@@ -43,6 +31,14 @@ const reStartGame = (model) => {
     stage: "SPLASH",
   };
 };
+
+const toggleOpenHatch = (model) => ({
+  ...model,
+  hatch: {
+    ...model.hatch,
+    lightVisible: !model.hatch.lightVisible,
+  },
+});
 
 const openCapsuleHatch = (model) => {
   if (!model.hatch.triedButton) {
@@ -97,32 +93,9 @@ const kickCapsuleHatch = (model) => {
   };
 };
 
-const toggleOpenHatchAction = (model) => ({
-  ...model,
-  hatch: {
-    ...model.hatch,
-    lightVisible: !model.hatch.lightVisible,
-  },
-});
-
-let actionData = {};
-actionData[actionIds.START] = {
-  name: "Start",
-  func: startGame,
-};
-actionData[actionIds.RESTART] = {
-  name: "Restart",
-  func: reStartGame,
-};
-actionData[actionIds.OPEN_CAPSULE_HATCH] = {
-  name: "OPEN",
-  func: openCapsuleHatch,
-};
-actionData[actionIds.KICK_CAPSULE_HATCH] = {
-  name: "Kick hatch",
-  func: kickCapsuleHatch,
-};
-actionData[actionIds.TOGGLE_HATCH_LIGHT] = {
-  name: "TOGGLE_HATCH_LIGHT",
-  func: toggleOpenHatchAction,
-};
+let messageMap = {};
+messageMap["START_MESSAGE"] = startGame;
+messageMap["TOGGLE_HATCH_LIGHT_MESSAGE"] = toggleOpenHatch;
+messageMap["RESTART_MESSAGE"] = reStartGame;
+messageMap["OPEN_CAPSULE_HATCH_MESSAGE"] = openCapsuleHatch;
+messageMap["KICK_CAPSULE_HATCH_MESSAGE"] = kickCapsuleHatch;

@@ -4,8 +4,8 @@ import { createReactRenderer } from 'utils/palhaReactRenderer';
 import registerServiceWorker from 'utils/registerServiceWorker';
 
 import Game from 'components/Game';
-import {runAction} from 'actions';
 import {loadModel} from 'storage';
+import {update} from 'update';
 
 import 'sanitize.css';
 import 'index.css';
@@ -16,10 +16,6 @@ export const initialModel = {
 
 export const view = (model, dispatch) => (
   <Game model={model} dispatch={dispatch} />
-);
-
-export const update = (model, actionId) => (
-  runAction(model, actionId)
 );
 
 const stranded = new App({
