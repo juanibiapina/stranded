@@ -5,7 +5,7 @@ import Game from 'components/Game';
 
 const model = {
   actions: [],
-  messages: [],
+  userMessages: [],
 };
 
 const dispatch = jest.fn();

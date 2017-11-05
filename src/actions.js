@@ -1,4 +1,4 @@
-import {messages, createMessage} from 'messages';
+import {userMessages, createUserMessage} from 'userMessages';
 import {saveModel} from 'storage';
 import {addMessage} from 'model';
 
@@ -32,8 +32,8 @@ const startGame = (model) => {
       stuck: true,
       requiredKicks: 3,
     },
-    messages: [
-      createMessage(messages.STRANDED),
+    userMessages: [
+      createUserMessage(userMessages.STRANDED),
     ],
   };
 };
@@ -52,21 +52,21 @@ const openCapsuleHatch = (model) => {
         ...model.hatch,
         triedButton: true,
       },
-      messages: addMessage(model, messages.NOTHING_HAPPENED),
+      userMessages: addMessage(model, userMessages.NOTHING_HAPPENED),
     };
   }
 
   if (model.hatch.stuck) {
     return {
       ...model,
-      messages: addMessage(model, messages.NOTHING_HAPPENED),
+      userMessages: addMessage(model, userMessages.NOTHING_HAPPENED),
     };
   }
 
   return {
     ...model,
     stage: "END",
-    messages: addMessage(model, messages.CAPSULE_HATCH_OPEN),
+    userMessages: addMessage(model, userMessages.CAPSULE_HATCH_OPEN),
   };
 };
 
@@ -74,7 +74,7 @@ const kickCapsuleHatch = (model) => {
   let requiredKicks = model.hatch.requiredKicks - 1;
 
   if (requiredKicks <= 0) {
-    let message = model.hatch.stuck ? messages.CAPSULE_MECHANISM_UNSTUCK : messages.CAPSULE_MECHANISM_STUCK;
+    let message = model.hatch.stuck ? userMessages.CAPSULE_MECHANISM_UNSTUCK : userMessages.CAPSULE_MECHANISM_STUCK;
 
     return {
       ...model,
@@ -83,7 +83,7 @@ const kickCapsuleHatch = (model) => {
         stuck: !model.hatch.stuck,
         requiredKicks: 0,
       },
-      messages: addMessage(model, message),
+      userMessages: addMessage(model, message),
     };
   }
 
@@ -93,7 +93,7 @@ const kickCapsuleHatch = (model) => {
       ...model.hatch,
       requiredKicks: requiredKicks,
     },
-    messages: addMessage(model, messages[`CAPSULE_HATCH_STUCK_${requiredKicks}`]),
+    userMessages: addMessage(model, userMessages[`CAPSULE_HATCH_STUCK_${requiredKicks}`]),
   };
 };
 
